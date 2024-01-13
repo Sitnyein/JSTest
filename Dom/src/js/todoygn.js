@@ -64,14 +64,7 @@ const createListUI = (text) => {
   const taskListEditBtn = list.querySelector(".tasklist-edit-btn");
   // taskListEditBtn.addEventListener("click", listEditHandler);
 
-  taskListDelBtn.addEventListener("click", () => {
-    if (confirm("Are u sure to delete")) {
-      list.remove();
-      listCount();
-      countDoneTaskList();
-
-    }
-  });
+  taskListDelBtn.addEventListener("click",listDelHandler);
 
   taskListEditBtn.addEventListener("click", () => {
     const tasklistText = list.querySelector(".tasklist-text");
@@ -88,34 +81,38 @@ const createListUI = (text) => {
 
   //checking
   // checking
-  // const taskListCheckBox = list.querySelector("[type='checkbox']");
-  // taskListCheckBox.addEventListener("click", () => {
-  // });
+
+  
+  
+
+
+  const taskListCheckBox = list.querySelector("[type='checkbox']");
+  taskListCheckBox.addEventListener("click", () => {
+  });
 
       const textBox = list.querySelector(".text-box");
       textBox.addEventListener("click",()=>{
         textBox.querySelector(".tasklist-text").classList.toggle("line-through");
-        countDoneTaskList();
+        countDoneTaskList();  
+       })
 
+       // checking
+  // const taskListCheckBox = list.querySelector("[type='checkbox']");
+  // taskListCheckBox.addEventListener("click", listCheckHandler);
 
-      })
+  // const listCheckHandler = (event) => {
+  //   const list = event.target.closest(".tasklist");
+  //   const textBox = list.querySelector(".text-box");
+  //   // textBox.querySelector("input").toggleAttribute("checked");
+  //   textBox.querySelector(".tasklist-text").classList.toggle("line-through");
+  //   countDoneTaskList();
+  // };
 
 
   return list;
 };
 
-//list counter length
-//  const count = document.querySelectorAll(".tasklist").length
-const listCount = () => {
-  const count = document.querySelectorAll(".tasklist").length;
-  listCounter.innerText = count;
-};
 
-const countDoneTaskList = () => {
-  doneCounter.innerText = document.querySelectorAll(
-    ".tasklist [type='checkbox']:checked"
-  ).length;
-};
 
 //handler //function with event listner
 
@@ -134,6 +131,50 @@ const addbtnhandler = () => {
     alert("you need to type something");
   }
 };
+
+//list counter length
+//  const count = document.querySelectorAll(".tasklist").length
+const listCount = () => {
+  const count = document.querySelectorAll(".tasklist").length;
+  listCounter.innerText = count;
+};
+
+const countDoneTaskList = () => {
+  doneCounter.innerText = document.querySelectorAll(
+    ".tasklist [type='checkbox']:checked"
+  ).length;
+};
+
+//listdel handler
+
+const listDelHandler = (event) => {
+  // console.log(event.target.parentElement);
+  // console.log(event.target.parentElement.parentElement);
+  // console.log(event.target.parentElement.parentElement.parentElement);
+  if (confirm("Are U sure to delete?")) {
+    // list.remove();
+    const list = event.target.closest(".tasklist");
+       list.remove();
+       listCount();
+       countDoneTaskList();
+    // list.children[0].classList.replace(
+    //   "animate__slideInLeft",
+    //   "animate__backOutRight"
+    // );
+    // list.addEventListener("animationend", () => {
+    //   list.remove();
+    //   countTaskList();
+    //   countDoneTaskList();
+    // });
+  }
+};
+
+textInput.addEventListener("keyup", (event) => {
+  // console.log(event);
+  if (event.key === "Enter") {
+      addbtnhandler();
+  }
+});
 
 //listeners
 addBtn.addEventListener("click", addbtnhandler);
