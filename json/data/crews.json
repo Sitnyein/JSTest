@@ -1,0 +1,76 @@
+{
+  "courses": [
+    {
+      "id": "1",
+      "title": "Web Development Foundation",
+      "short_name": "WDF",
+      "fee": 50000
+    },
+    {
+      "id": "3",
+      "title": "Web App Development",
+      "short_name": "WAD",
+      "fee": 300000
+    },
+    {
+      "id": "4",
+      "title": "Figma Baisc",
+      "short_name": "FGB",
+      "fee": 100000
+    },
+    {
+      "id": "5",
+      "title": "Figma Master",
+      "short_name": "PUD",
+      "fee": 100000
+    },
+    {
+      "id": "6",
+      "short_name": "ITA",
+      "fee": 150000,
+      "title": "Introduction to AI"
+    }
+  ],
+  "batches": [
+    {
+      "id": "1",
+      "name": "SWD June Weekday"
+    },
+    {
+      "id": "2",
+      "name": "SWD June Weekend"
+    },
+    {
+      "id": "3",
+      "name": "SWD Aug Weekday"
+    },
+    {
+      "name": "my tesing",
+      "id": "4"
+    },
+    {
+      "id": "5",
+      "name": "PUD Dec Weekday"
+    },
+    {
+      "name": "Workshop Dev 2023",
+      "id": "6"
+    },
+    {
+      "name": "React Dev 2023",
+      "id": "7"
+    },
+    {
+      "id": "8",
+      "name": "chankhne"
+    },
+    {
+      "id": "9",
+      "name": "chankhne"
+    },
+    {
+      "name": "helloworld",
+      "id": "10"
+    }
+  ]
+}

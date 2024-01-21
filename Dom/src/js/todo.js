@@ -2,18 +2,29 @@
 const app = document.querySelector("#app");
 const textInput = document.querySelector("#textInput");
 const addBtn = document.querySelector("#addBtn");
-const doneCounter = document.querySelector("#doneCounter");
-const listCounter = document.querySelector("#listCounter");
+const doneCount = document.querySelector("#doneCount");
+const totalCount = document.querySelector("#totalCount");
 const taskLists = document.querySelector("#taskLists");
 
 
-//fuctions 
+
+
+// //fuctions 
+
+
+
+
+//creae ui //list start
  const createListUI = (text) => {
+
+  
     const list = document.createElement("div");
+    list.className = "list animate__animated animate__slideInLeft   flex mb-5 justify-between items-center border-2 border-black p-5"
+   
     list.innerHTML =`
-    <div class=" animate__animated animate__slideInLeft   flex mb-5 justify-between items-center border-2 border-black p-5">
+    
     <div class=" text-box flex  items-center">
-      <input type="checkbox" class="w-5 h-5" />
+      <input type="checkbox" class="w-5 h-5 listcheckbox" />
       <div class="tasklist-text ms-2">
       ${text}
       </div>
@@ -42,7 +53,7 @@ const taskLists = document.querySelector("#taskLists");
           viewBox="0 0 24 24"
           stroke-width="1.2"
           stroke="currentColor"
-          class="w-4"
+          class="w-4 pointer-events-none"
         >
           <path
             stroke-linecap="round"
@@ -52,20 +63,119 @@ const taskLists = document.querySelector("#taskLists");
         </svg>
       </button>
     </div>
-  </div>
+     
     `;
+
+    //listcheck
+    const listcheckbox = list.querySelector(".listcheckbox");
+    const textBox = list.querySelector(".text-box");
+    listcheckbox.addEventListener("click",donelist);
+   
+
+    function  donelist() {
+      console.log("check");
+      // textBox.classList.toggle("line-through");
+     const finishcount = document.querySelectorAll(".listcheckbox:checked").length;
+     doneCount.innerText = finishcount;
+    }
+   
+    // textBox.addEventListener("click",()=>{
+    //   textBox.querySelector(".tasklist-text").classList.toggle("line-through");
+    //   countDoneTaskList();
+
+
+    // })
+
+    //delbtn
+    const listDelbtn = list.querySelector(".tasklist-del-btn");
+    listDelbtn.addEventListener("click",deletelist)
+    // listDelbtn.addEventListener("click", () => {
+    //   confirm("Are u sure to delete") && list.remove();
+      
+    //   totallist();
+    //   donelist();
+    // })// 
+
+    //editbtn
+    const taskListEditBtn = list.querySelector(".tasklist-edit-btn");
+    taskListEditBtn.addEventListener("click",updatelist);
+    // taskListEditBtn.addEventListener("click", () => {
+    
+      
+    //   const tasklistText = list.querySelector(".tasklist-text");
+    //   tasklistText.innerHTML = null;
+    //   let input = document.createElement("input");
+    //   input.classList.add("border", "border-black", "p-1", "rounded");
+    //   input.value = text;
+    //   tasklistText.append(input);
+  
+    //   input.addEventListener("blur", () => {
+    //     tasklistText.innerText = input.value;
+    //   });
+    // }
+   
+    // );
     return list;
+
+  
 }
 
 
-//listener
-addBtn.addEventListener("click", () => {
-  alert("hello world");
-    console.log(textInput.value);
-    //create list ui
+
+
+console.log("todojavascript");
+
+
+const totallist = () => {
+  const totaltask = document.querySelectorAll(".list").length;
+  totalCount.innerText =totaltask;
+}
+// const total =  list.querySelector(".list").length;
+// console.log(total);
+
+
+
+//handler
+
+const addList = () =>  {
+  console.log("add list fun");
+  createListUI(textInput.value);
+      taskLists.append(createListUI(textInput.value));
+    //
+    totallist();
+    // clear input 
+    textInput.value = null 
+}
+
+const deletelist = (event) => {
+  // console.log("delete list");
+  console.log(event);
+  const list  = event.target.closest(".list");
+       confirm("Are u sure to delete") && list.remove();
+      
+      totallist();
+      donelist();
+}
+
+// const checklist = (event) => {
+//   const listtext = event.target.nextElementSibling;
+//   listtext.classlist.toggle("line-through");
   
-    // taskLists.append(createListUI(textInput.value));
-    
-    // // clear input 
-    // textInput.value = null 
+// } 
+
+
+const updatelist = (event) => {
+    const cclist = event.target.closest(".list");
+    const tasklist = cclist.querySelector("tasklist-text")
+    console.log(tasklist.innerText);
+
+}
+
+
+//listener //listenter
+addBtn.addEventListener("click",addList);
+textInput.addEventListener("keyup", (event) => {
+  if(event.key === "Enter") {
+    addList();
+  }
 })
